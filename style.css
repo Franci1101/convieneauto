@@ -614,6 +614,38 @@ body{
   transform: translateY(0);
 }
 
+/* ===== Link interni SEO ===== */
+
+.seo-links {
+  margin-top: 40px;
+}
+
+.seo-links h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #cbd5e1;
+  margin-bottom: 10px;
+}
+
+.seo-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.seo-links li {
+  margin: 8px 0;
+}
+
+.seo-links a {
+  color: #60a5fa;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.seo-links a:hover {
+  text-decoration: underline;
+}
+
 /* Rispetta chi ha “riduci animazioni” attivo */
 @media (prefers-reduced-motion: reduce) {
   .fade-in {
