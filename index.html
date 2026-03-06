@@ -5,7 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Costo reale finanziamento auto | ConvieneAuto</title>
   <meta name="description" content="Analizza il costo reale del finanziamento auto prima di firmare. Calcola rate, maxi rata e costi accessori per capire quanto pagherai davvero." />
-
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ConvieneAuto",
+    "url": "https://convieneauto.pages.dev/",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "description": "Calcolatore per analizzare il costo reale di un finanziamento auto: rate, maxi rata e costi accessori.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    }
+  }
+  </script>
   <!-- Minimal CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -154,6 +169,12 @@
       <div class="actions">
         <button id="btnCalc" class="btn" type="button">Calcola</button>
         <button id="btnReset" class="btn btn-ghost" type="button">Reset</button>
+      </div>
+      <div class="mini-nav">
+        <a href="/maxi-rata-auto.html">Maxi rata: conviene?</a>
+        <a href="/differenza-tan-taeg.html">TAN vs TAEG</a>
+        <a href="/come-leggere-preventivo-auto.html">Leggere un preventivo</a>
+        <a href="/finanziamento-vs-leasing.html">Finanziamento vs leasing</a>
       </div>
 
       <div id="error" class="error" aria-live="polite"></div>
