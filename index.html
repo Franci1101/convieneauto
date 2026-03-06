@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ConvieneAuto – Costo reale finanziamento auto</title>
+  <meta name="description" content="Inserisci i dati del preventivo e scopri quanto ti costa davvero il finanziamento auto prima di firmare." />
+
+  <!-- Minimal CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="brand">
+        <div class="logo" aria-label="logo">
+          <span class="logo-dot"></span>
+        </div>
+        <div>
+          <div class="brand-title">ConvieneAuto</div>
+          <div class="brand-subtitle">Scopri il costo reale del finanziamento auto</div>
+        </div>
+      </div>
+
+      <div class="header-note">
+        Inserisci i dati del preventivo.
+        Se conosci la <b>rata mensile</b>, inserisci solo quella (più affidabile).
+        Usa il <b>TAN</b> solo se la <b>rata</b> non è disponibile.
+      </div>
+    </div>
+  </header>
+
+  
+  <div class="ad-top">
+        <!-- Google AdSense Code Here -->Spazio Pubblicità
+  </div>
+  <main class="container main">
+    
+    <!-- LEFT: INPUT -->
+    <section class="card">
+      <div class="card-title">Dati del preventivo</div>
+
+      <div class="section">
+        <div class="section-title">🚗 Auto</div>
+        <div class="grid2">
+          <label class="field">
+            <span>Prezzo auto (€)</span>
+            <input id="price" type="text" inputmode="decimal" placeholder="es. 28900" />
+          </label>
+          <label class="field">
+            <span>Anticipo (€)</span>
+            <input id="down" type="text" inputmode="decimal" placeholder="es. 4000" />
+          </label>
+          <label class="field">
+            <span>
+              Permuta (€) <span class="muted">(opzionale)</span>
+              <button class="tip" type="button" aria-expanded="false"
+                data-tip="La permuta riduce il prezzo da pagare e l’importo finanziato, ma NON è un esborso cash: è il valore dell’auto che dai dentro. Per questo non la sommiamo nel totale pagato (cash).">
+                i
+              </button>
+            </span>
+            <input id="trade" type="text" inputmode="decimal" placeholder="0" />
+          </label>
+          <div class="field readonly">
+            <span>Importo finanziato (€)</span>
+            <div id="financed" class="readonly-value">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">💳 Finanziamento</div>
+        <div class="grid2">
+          <label class="field">
+            <span>Durata (mesi)</span>
+            <input id="months" type="number" min="1" step="1" placeholder="es. 60" />
+          </label>
+
+          <label class="field">
+            <span>
+              TAN annuo (%) <span class="muted">(opzionale)</span>
+              <button class="tip" type="button" aria-expanded="false" data-tip="TAN = tasso nominale annuo: indica gli interessi. Non include costi accessori.">i</button>
+            </span>
+            <input id="tan" type="text" inputmode="decimal" placeholder="es. 7,5" />
+            <small class="help">Se lo inserisci, la rata viene calcolata automaticamente.</small>
+          </label>
+
+          <label class="field" id="rateField">
+            <span>Rata mensile (€) <span class="muted">(se TAN assente)</span></span>
+            <input id="rate" type="text" inputmode="decimal" placeholder="es. 329" />
+            <small class="help">Inserisci la rata del preventivo se non conosci il TAN.</small>
+          </label>
+
+          <label class="field">
+            <span>Maxi rata finale (€) <span class="muted">(se presente)</span></span>
+            <input id="balloon" type="text" inputmode="decimal" placeholder="0" />
+          </label>
+
+          <label class="field">
+            <span>
+              TAEG (%) <span class="muted">(opzionale)</span>
+              <button class="tip" type="button" aria-expanded="false" data-tip="TAEG = costo totale del finanziamento: include interessi + spese (istruttoria, incasso rata, ecc.). È il numero più utile per confrontare offerte.">i</button>
+            </span>
+            <input id="taeg" type="text" inputmode="decimal" placeholder="es. 11,9" />
+            <small class="help">Il TAEG include anche costi accessori (oltre agli interessi).</small>
+          </label>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">📄 Costi accessori</div>
+        <div class="grid2">
+          <label class="field">
+            <span>
+              Spese istruttoria (€)
+              <button class="tip" type="button" aria-expanded="false"
+                data-tip="Costo fisso per l’apertura della pratica di finanziamento. Può essere incluso nel finanziamento oppure pagato a parte.">
+                i
+              </button>
+            </span>
+            <input id="fee" type="text" inputmode="decimal" placeholder="0" />
+          </label>
+          <label class="field">
+            <span>
+              Spese incasso rata (€/mese)
+              <button class="tip" type="button" aria-expanded="false" data-tip="Costo applicato ogni mese per la gestione/pagamento della rata. Moltiplicalo per i mesi: pesa più di quanto sembra.">i</button>
+            </span>
+            <input id="collection" type="text" inputmode="decimal" placeholder="0" />
+          </label>
+          <label class="field">
+            <span>
+              Imposte/bollo (€)
+              <button class="tip" type="button" aria-expanded="false"
+                data-tip="Imposta sostitutiva o bollo sul finanziamento. È una tassa prevista per legge, di solito una piccola percentuale dell'importo finanziato.">
+                i
+              </button>
+            </span>
+            <input id="tax" type="text" inputmode="decimal" placeholder="0" />
+          </label>
+          <label class="field">
+            <span>
+              Assicurazioni/servizi (€ totali)
+              <button class="tip" type="button" aria-expanded="false"
+                data-tip="Servizi aggiuntivi come assicurazione furto/incendio, estensione garanzia, manutenzione o protezione credito. Spesso sono inclusi nel finanziamento e aumentano il costo totale.">
+                i
+              </button>
+            </span>
+            <input id="services" type="text" inputmode="decimal" placeholder="0" />
+          </label>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="btnCalc" class="btn" type="button">Calcola</button>
+        <button id="btnReset" class="btn btn-ghost" type="button">Reset</button>
+      </div>
+
+      <div id="error" class="error" aria-live="polite"></div>
+
+      <div class="disclaimer">
+        Stima a scopo informativo. Il costo reale dipende da condizioni contrattuali, servizi obbligatori e spese applicate.
+        Verifica sempre TAN/TAEG e documentazione ufficiale.
+      </div>
+    </section>
+
+    <!-- RIGHT: OUTPUT -->
+    <aside class="card result">
+      <div class="card-title">Risultato</div>
+
+      <div class="hero">
+        <div class="hero-label">Totale complessivo pagato (incl. anticipo):</div>
+        <div id="outTotal" class="hero-value">—</div>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi">
+          <div class="kpi-label">Differenza rispetto al prezzo auto</div>
+          <div id="outExtraEuro" class="kpi-value">—</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Percentuale extra</div>
+          <div id="outExtraPct" class="kpi-value">—</div>
+        </div>
+        <div id="outExtraHint" class="muted tiny" style="margin-top:6px;">—</div>
+        <div id="outFinancedLine" class="muted tiny" style="margin-top:6px;">—</div>
+        <div id="outExtrasLine" class="muted tiny" style="margin-top:4px;">—</div>
+      </div>
+      <div class="breakdown">
+        <div class="breakdown-title">Composizione del totale</div>
+        <div class="breakdown-grid">
+          <div class="brow"><span>Anticipo</span><b id="outBDDown">—</b></div>
+          <div class="brow"><span>Rate totali</span><b id="outBDRates">—</b></div>
+          <div class="brow"><span>Maxi rata</span><b id="outBDBalloon">—</b></div>
+          <div class="brow"><span>Accessori</span><b id="outBDExtras">—</b></div>
+          <div class="brow total"><span>Totale complessivo</span><b id="outBDTotal">—</b></div>
+        </div>
+        <div class="muted tiny">
+          *La permuta riduce l’importo finanziato, ma non è un pagamento cash.
+        </div>
+      </div>
+
+      <div class="risk">
+        <div id="outRiskBadge" class="badge">—</div>
+        <div id="outRiskText" class="risk-text">Compila i dati e clicca “Calcola”.</div>
+      </div>
+      <button id="btnToggleBalloon" class="btn btn-ghost" type="button" style="margin-top:12px; width:100%;">
+        ⇄ Simula senza maxi rata
+      </button>
+      <div id="balloonHint" class="muted tiny" style="margin-top:6px;">—</div>
+      <details class="details">
+        <summary>Mostra dettagli</summary>
+        <div class="details-grid">
+          <div class="row"><span>Rata</span><b id="outRateUsed">—</b></div>
+          <div class="row"><span>Totale finanziamento (rate + maxi)</span><b id="outTotalPayments">—</b></div>
+          <div class="row"><span>Accessori totali</span><b id="outExtras">—</b></div>
+          <div class="row"><span>Costo finanziamento (interessi stimati)</span><b id="outFinanceCost">—</b></div>
+        </div>
+        <div class="muted tiny">
+          *Costo finanziamento = (rate + maxi) − importo finanziato.
+        </div>
+      </details>
+      <div class="copy-bar">
+        <button id="btnCopy" class="btn btn-ghost" type="button">📋 Copia risultato</button>
+        <div id="copyMsg" class="copy-msg" aria-live="polite"></div>
+      </div>
+    </aside>
+    
+  </main>
+  <div class="ad-top">
+      <!-- Google AdSense Code Here -->Spazio Pubblicità
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
