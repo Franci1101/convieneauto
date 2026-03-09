@@ -690,18 +690,28 @@ body{
 }
 
 .article h1 {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
   line-height: 1.25;
-  margin-bottom: 20px;
-  color: #e2e8f0;
+  margin-bottom: 28px;
 }
 
 .article h2 {
   font-size: 18px;
-  font-weight: 750;
-  margin-top: 36px;
-  color: #e2e8f0;
+  font-weight: 700;
+  margin-top: 50px;
+  margin-bottom: 14px;
+}
+
+.article h2:first-of-type {
+  margin-top: 20px;
+}
+
+.article h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 28px;
+  color: #cbd5e1;
 }
 
 .article p {
@@ -718,6 +728,70 @@ body{
 
 .article li {
   margin: 6px 0;
+}
+
+.example-box{
+  margin: 18px 0 26px;
+  padding: 18px 18px;
+  border: 1px solid rgba(120,160,255,.25);
+  border-radius: 14px;
+  background: rgba(10,18,40,.35);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.25) inset;
+}
+
+.example-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 14px 22px;
+}
+
+.example-label{
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: rgba(203,213,225,.85);
+}
+
+.example-value{
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #e6efff;
+}
+
+.example-sep{
+  margin: 14px 0;
+  border: 0;
+  height: 1px;
+  background: rgba(148,163,184,.22);
+}
+
+.example-result .example-total{
+  margin: 6px 0 8px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(226,232,240,.95);
+}
+
+.example-note{
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(148,163,184,.95);
+}
+
+.example-warning{
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(59,130,246,.10);
+  border: 1px solid rgba(59,130,246,.20);
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(226,232,240,.95);
+}
+
+@media (max-width: 640px){
+  .example-grid{ grid-template-columns: 1fr; }
 }
 
 /* Rispetta chi ha “riduci animazioni” attivo */
