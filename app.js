@@ -701,36 +701,91 @@ function initDetailsScroll(){
 });
 }
 
-/* ========= Init ========= */
+/* ========= GA4 helper (safe) ========= */
+function track(eventName, params = {}) {
+  try {
+    if (typeof gtag === "function") {
+      gtag("event", eventName, params);
+    }
+  } catch (_) {
+    // mai bloccare il sito per analytics
+  }
+}
 
-window.addEventListener("DOMContentLoaded", () => {
+/* ========= Init ========= */
+document.addEventListener("DOMContentLoaded", () => {
   resetAll();
 
-  $("btnCalc")?.addEventListener("click", calc);
-  $("btnReset")?.addEventListener("click", resetAll);
+  // ----- CALCOLA -----
+  $("btnCalc")?.addEventListener("click", () => {
+    // 1) traccio click
+    track("click_calcola", {
+      event_category: "engagement",
+      event_label: "Calcola Finanziamento"
+    });
 
-  ["price","down","trade"].forEach(id => {
+    // 2) calcolo
+    calc();
+
+    // 3) traccio "calcolo_ok" solo se ho un risultato valido
+    const total = $("outTotal")?.textContent?.trim();
+    if (total && total !== "—") {
+      track("calcolo_ok", {
+        event_category: "engagement",
+        event_label: "Risultato generato"
+      });
+    }
+  });
+
+  // ----- RESET -----
+  $("btnReset")?.addEventListener("click", () => {
+    track("click_reset", { event_category: "engagement" });
+    resetAll();
+  });
+
+  // ----- LIVE financed -----
+  ["price", "down", "trade"].forEach(id => {
     $(id)?.addEventListener("input", liveFinanced);
   });
 
+  // ----- TAN change -----
   $("tan")?.addEventListener("input", updateRateFieldState);
 
-  $("btnCopy")?.addEventListener("click", copyResult);
+  // ----- COPY RESULT -----
+  $("btnCopy")?.addEventListener("click", async () => {
+    track("copy_result", { event_category: "engagement" });
+    await copyResult();
+  });
+
+  // ----- TOGGLE MAXI RATA -----
   $("btnToggleBalloon")?.addEventListener("click", () => {
     balloonSimulatedOff = !balloonSimulatedOff;
+
     const btn = $("btnToggleBalloon");
     if (btn) btn.textContent = balloonSimulatedOff ? "↩︎ Torna con maxi rata" : "⇄ Simula senza maxi rata";
 
-    // se hai già un risultato calcolato, ricalcola subito
-    if (lastCalcInputs) calc();
+    track("toggle_maxi_rata", {
+      event_category: "engagement",
+      state: balloonSimulatedOff ? "off" : "on"
+    });
+
+    if (lastCalcInputs) {
+      calc();
+      const total = $("outTotal")?.textContent?.trim();
+      if (total && total !== "—") {
+        track("calcolo_ok", {
+          event_category: "engagement",
+          event_label: "Risultato aggiornato toggle"
+        });
+      }
+    }
   });
+
   updateRateFieldState();
   initDetailsScroll();
   initTooltips();
-});
 
-// Fade-in on scroll (IntersectionObserver)
-document.addEventListener("DOMContentLoaded", () => {
+  // ----- Fade-in on scroll (IntersectionObserver) -----
   const els = document.querySelectorAll(".fade-in");
   if (!("IntersectionObserver" in window)) {
     els.forEach(el => el.classList.add("is-visible"));
@@ -750,4 +805,4 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   els.forEach(el => io.observe(el));
-}); 
+});
